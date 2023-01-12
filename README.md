@@ -1,0 +1,3 @@
+#Descripcion
+
+Este código es un componente de React llamado "TodoList" que permite crear, marcar como completado, eliminar y ver las tareas agregadas. Utiliza el Hook de estado de React "useState" para mantener el estado de las tareas y de la nueva tarea que se está agregando. Contiene un formulario para agregar nuevas tareas, una lista para mostrar las tareas existentes y funciones para manejar diferentes acciones como cambiar el estado de una tarea, agregar una nueva tarea y eliminar una tarea existente. También tiene una función para formatear la fecha de creación de las tareas y utiliza elementos de JSX para mostrar el contenido en una interfaz web.
