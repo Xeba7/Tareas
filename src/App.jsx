@@ -75,8 +75,8 @@ function TodoList() {
     });
   };
 
-  const tasksQuantity = todos.length;
-  const completedTasks = todos.filter((todo) => todo.completed).length;
+  const cantidad = todos.length;
+  const completas = todos.filter((todo) => todo.completed).length;
 
   return (
     <div className="p-2">
@@ -100,7 +100,7 @@ function TodoList() {
         <a
           href="https://cl.linkedin.com/in/sebasti%C3%A1n-cisterna-reyes-111a67256"
           target="_black"
-          className="cursor-pointer hover:scale-[103%]"
+          className="cursor-pointer hover:scale-[103%]  transform-origin-center"
         >
           <svg
             fill="#FFFFFF"
@@ -114,22 +114,23 @@ function TodoList() {
           </svg>
         </a>
       </nav>
-      <div className="container   lg:w-1/2  text-center  md:py-6 mt-20 rounded-lg border-4 border-cyan-200 p-5 pb-10 rounded-b-3xl">
+      <div className="container    xl:w-1/2 lg:w-2/3 text-center   mt-20 sm:rounded-lg sm:border-4 sm:border-cyan-200 sm:p-5 sm:pb-10 sm:rounded-b-3xl">
         <h1 className="text-6xl font-bold text-sky-200">Tareas</h1>
 
         <form
           onSubmit={handleAddTodo}
-          className="mt-10 flex  gap-10 justify-between p-2"
+          className="md:mt-10 md:flex  md:gap-10 justify-between md:p-2 "
         >
           <input
-            className="p-3 px-5 rounded-full text-white bg-slate-800 w-full border-white border-2 hover:border-cyan-200 text-xl"
+            className="p-3 px-5 rounded-full text-white bg-slate-800 w-full border-white border-2 hover:border-cyan-200 md:text-xl mt-3"
             type="text"
             value={newTodo}
             onChange={handleNewTodoChange}
+            maxLength="64"
             placeholder="Escribe una nueva tarea"
           />
           <button
-            className="border-2 border-white rounded-full p-2 hover:border-cyan-300  font-semibold hover:scale-y-105 transform-origin-center text-cyan-100 w-40"
+            className="border-2 border-white rounded-full p-3 hover:border-cyan-300  font-semibold hover:scale-y-105 transform-origin-center text-cyan-100 md:w-40 mt-3 w-full"
             type="submit"
             disabled={newTodo === ""}
           >
@@ -139,7 +140,7 @@ function TodoList() {
         <div className="text-white flex justify-center gap-5 font-semibold mt-5">
           <p>Tareas completas</p>
           <span>
-            {completedTasks} of {tasksQuantity}
+            {completas} de {cantidad}
           </span>
         </div>
         <ul className="mt-5 border-t-[1px]  p-2 border-cyan-100   text-slate-300">
@@ -147,7 +148,7 @@ function TodoList() {
             return (
               <li key={index} className=" pt-5">
                 <section className="flex justify-between  pt-3 border-b-2 border-cyan-300">
-                  <span className="flex self-center mr-3">
+                  <span className="flex self-center md:mr-3 mr-1">
                     <button
                       onClick={() => handleToggleComplete(index)}
                       className="border-2 border-cyan-200 rounded-full hover:scale-105"
@@ -156,7 +157,7 @@ function TodoList() {
                     </button>
                   </span>
                   <p
-                    className="text-2xl pb-1 truncate   w-full text-start"
+                    className="text-2xl pb-1 w-full text-start break-all mr-1"
                     style={{
                       textDecoration: todo.completed ? "line-through" : "none",
                     }}
@@ -164,7 +165,7 @@ function TodoList() {
                   >
                     {todo.text}
                   </p>
-                  <span className="flex self-center gap-2">
+                  <span className="flex self-center ">
                     <button
                       onClick={() => handleDeleteTodo(index)}
                       className="border-2 border-cyan-200 rounded-full hover:scale-105"
