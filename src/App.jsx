@@ -4,6 +4,21 @@ function TodoList() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
+  // Recuperar la lista de tareas del LocalStorage en el montaje inicial del componente
+  useEffect(() => {
+    const todosFromLocalStorage = localStorage.getItem("todos");
+    console.log(todosFromLocalStorage);
+    if (todosFromLocalStorage) {
+      setTodos(JSON.parse(todosFromLocalStorage));
+    }
+  }, []);
+
+  // Guardar la lista de tareas en el LocalStorage cada vez que se actualiza el estado de "todos"
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+    console.log(localStorage);
+  }, [todos]);
+
   function handleNewTodoChange(e) {
     setNewTodo(e.target.value);
   }
@@ -60,8 +75,11 @@ function TodoList() {
     });
   };
 
+  const tasksQuantity = todos.length;
+  const completedTasks = todos.filter((todo) => todo.completed).length;
+
   return (
-    <div>
+    <div className="p-2">
       <nav className="flex p-5 justify-end gap-5">
         <a
           href="https://github.com/Xeba7"
@@ -96,8 +114,9 @@ function TodoList() {
           </svg>
         </a>
       </nav>
-      <div className="container  w-1/2  text-center  py-6 mt-20 rounded-lg border-4 border-cyan-200 p-5 pb-10 rounded-b-3xl">
+      <div className="container   lg:w-1/2  text-center  md:py-6 mt-20 rounded-lg border-4 border-cyan-200 p-5 pb-10 rounded-b-3xl">
         <h1 className="text-6xl font-bold text-sky-200">Tareas</h1>
+
         <form
           onSubmit={handleAddTodo}
           className="mt-10 flex  gap-10 justify-between p-2"
@@ -117,13 +136,27 @@ function TodoList() {
             Agregar
           </button>
         </form>
-        <ul className="mt-10 border-t-2  p-2 border-cyan-100   text-slate-300">
+        <div className="text-white flex justify-center gap-5 font-semibold mt-5">
+          <p>Tareas completas</p>
+          <span>
+            {completedTasks} of {tasksQuantity}
+          </span>
+        </div>
+        <ul className="mt-5 border-t-[1px]  p-2 border-cyan-100   text-slate-300">
           {todos.map((todo, index) => {
             return (
-              <li key={index} className="border-b-2 border-cyan-300 pt-3">
-                <section className="flex justify-between  pt-3">
+              <li key={index} className=" pt-5">
+                <section className="flex justify-between  pt-3 border-b-2 border-cyan-300">
+                  <span className="flex self-center mr-3">
+                    <button
+                      onClick={() => handleToggleComplete(index)}
+                      className="border-2 border-cyan-200 rounded-full hover:scale-105"
+                    >
+                      {todo.completed ? "✔️" : "🕐"}
+                    </button>
+                  </span>
                   <p
-                    className="text-2xl pb-1 truncate"
+                    className="text-2xl pb-1 truncate   w-full text-start"
                     style={{
                       textDecoration: todo.completed ? "line-through" : "none",
                     }}
@@ -131,13 +164,7 @@ function TodoList() {
                   >
                     {todo.text}
                   </p>
-                  <span className="flex self-end gap-2">
-                    <button
-                      onClick={() => handleToggleComplete(index)}
-                      className="border-2 border-cyan-200 rounded-full hover:scale-105"
-                    >
-                      {todo.completed ? "✔️" : "🕐"}
-                    </button>
+                  <span className="flex self-center gap-2">
                     <button
                       onClick={() => handleDeleteTodo(index)}
                       className="border-2 border-cyan-200 rounded-full hover:scale-105"
