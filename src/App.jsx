@@ -80,11 +80,12 @@ function TodoList() {
 
   return (
     <div className="p-2">
-      <nav className="flex p-5 justify-end gap-5">
+      <nav className="flex p-5 justify-end gap-5 ">
         <a
           href="https://github.com/Xeba7"
           target="_black"
           className="cursor-pointer hover:scale-105 transform-origin-center"
+          alt="icono de github"
         >
           <svg
             fill="#FFFFFF"
@@ -101,6 +102,7 @@ function TodoList() {
           href="https://cl.linkedin.com/in/sebasti%C3%A1n-cisterna-reyes-111a67256"
           target="_black"
           className="cursor-pointer hover:scale-[103%]  transform-origin-center"
+          alt="icono de linkedin"
         >
           <svg
             fill="#FFFFFF"
@@ -126,7 +128,7 @@ function TodoList() {
             type="text"
             value={newTodo}
             onChange={handleNewTodoChange}
-            maxLength="64"
+            maxLength="60"
             placeholder="Escribe una nueva tarea"
           />
           <button
@@ -137,7 +139,7 @@ function TodoList() {
             Agregar
           </button>
         </form>
-        <div className="text-white flex justify-center gap-5 font-semibold mt-5">
+        <div className="text-white flex justify-center gap-3 font-semibold mt-5">
           <p>Tareas completas</p>
           <span>
             {completas} de {cantidad}
